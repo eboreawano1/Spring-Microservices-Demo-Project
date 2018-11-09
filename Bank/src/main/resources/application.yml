@@ -1,0 +1,64 @@
+spring:
+  profiles.active: profile3
+  
+---
+
+spring:
+  profiles: profile1
+  
+server: 
+  servlet: 
+    context-path: /bank
+
+name:
+  option: 1
+
+address:
+  option: full
+  
+---
+
+spring:
+  profiles: profile2
+
+server: 
+  servlet: 
+    context-path: /bank
+
+name:
+  option: 1
+
+address:
+  option: partial
+  
+---
+
+spring:
+  profiles: profile3
+  
+server: 
+  servlet: 
+    context-path: /bank
+
+name:
+  option: 2
+
+address:
+  option: full
+
+---
+
+spring:
+  profiles: profile4
+  
+server: 
+  servlet: 
+    context-path: /bank
+
+name:
+  option: 2
+
+address:
+  option: partial
+  
+  
