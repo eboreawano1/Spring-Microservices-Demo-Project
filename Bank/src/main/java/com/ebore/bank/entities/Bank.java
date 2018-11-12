@@ -1,17 +1,17 @@
 package com.ebore.bank.entities;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Bank {
 
-	@JsonProperty("bankName") private String bankName;
-	@JsonProperty("accountNumber") private long accountNumber;
-	@JsonProperty("cardNumber") private long cardNumber;
-	@JsonProperty("accountActive") private boolean accountActive;
+	private String bankName;
+	private long accountNumber;
+	private long cardNumber;
+	private boolean accountActive;
 	
-	@JsonCreator
-	public Bank(@JsonProperty("bankName") String bankName, @JsonProperty("accountNumber") long accountNumber, @JsonProperty("cardNumber")  long cardNumber,@JsonProperty("accountActive") boolean accountActive) {
+	public Bank() {
+		super();
+	}
+
+	public Bank(String bankName, long accountNumber, long cardNumber, boolean accountActive) {
 		super();
 		this.bankName = bankName;
 		this.accountNumber = accountNumber;

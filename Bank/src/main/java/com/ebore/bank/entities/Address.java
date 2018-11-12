@@ -1,17 +1,17 @@
 package com.ebore.bank.entities;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Address {
-	@JsonProperty("addressLine1") private String addressLine1;
-	@JsonProperty("addressLine2") private String addressLine2;
-	@JsonProperty("city") private String city;
-	@JsonProperty("state") private String state;
-	@JsonProperty("zip") private String zip;
+	private String addressLine1;
+	private String addressLine2;
+	private String city;
+	private String state;
+	private String zip;
 	
-	@JsonCreator
-	public Address(@JsonProperty("addressLine1") String addressLine1,@JsonProperty("addressLine2") String addressLine2, @JsonProperty("city") String city, @JsonProperty("state") String state, @JsonProperty("zip") String zip) {
+	public Address() {
+		super();
+	}
+
+	public Address( String addressLine1, String addressLine2, String city, String state, String zip) {
 		super();
 		this.addressLine1 = addressLine1;
 		this.addressLine2 = addressLine2;

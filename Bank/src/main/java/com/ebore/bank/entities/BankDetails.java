@@ -1,14 +1,14 @@
 package com.ebore.bank.entities;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class BankDetails {
-	@JsonProperty("employee") private Employee employee;
-	@JsonProperty("bank") private Bank bank;
+	private Employee employee;
+	private Bank bank;
 	
-	@JsonCreator
-	public BankDetails(@JsonProperty("employee") Employee employee, @JsonProperty("bank") Bank bank) {
+	public BankDetails() {
+		super();
+	}
+
+	public BankDetails( Employee employee, Bank bank) {
 		super();
 		this.employee = employee;
 		this.bank = bank;
@@ -35,3 +35,4 @@ public class BankDetails {
 		return "BankDetails [employee=" + employee + ", bank=" + bank + "]";
 	}
 }
+

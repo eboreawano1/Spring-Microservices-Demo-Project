@@ -1,20 +1,20 @@
 package com.ebore.bank.entities;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class Employee {
 
-	@JsonProperty("employeeFirstName") private String employeeFirstName;
-	@JsonProperty("employeeMiddleName") private String employeeMiddleName;
-	@JsonProperty("employeeLastName") private String employeeLastName;
-	@JsonProperty("employeeId") private long employeeId;
-	@JsonProperty("employeeRole") private String employeeRole;
-	@JsonProperty("address") private Address address;
+	private String employeeFirstName;
+	private String employeeMiddleName;
+	private String employeeLastName;
+	private long employeeId;
+	private String employeeRole;
+	private Address address;
 	
-	@JsonCreator
-	public Employee(@JsonProperty("employeeFirstName") String employeeFirstName, @JsonProperty("employeeMiddleName") String employeeMiddleName, @JsonProperty("employeeLastName") String employeeLastName, @JsonProperty("employeeId") long employeeId,
-			@JsonProperty("employeeRole") String employeeRole, @JsonProperty("address") Address address) {
+	public Employee() {
+		super();
+	}
+
+	public Employee(String employeeFirstName, String employeeMiddleName, String employeeLastName, long employeeId,
+		String employeeRole, Address address) {
 		super();
 		this.employeeFirstName = employeeFirstName;
 		this.employeeMiddleName = employeeMiddleName;
@@ -79,3 +79,4 @@ public class Employee {
 				+ employeeRole + ", address=" + address + "]";
 	}
 }
+

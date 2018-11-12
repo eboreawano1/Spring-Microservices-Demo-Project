@@ -1,15 +1,15 @@
-spring:
-  profiles.active: profile3
-  
----
-
-spring:
-  profiles: profile1
-  
 server: 
   servlet: 
     context-path: /bank
 
+spring:
+  profiles.active: profile3
+
+---
+
+spring:
+  profiles: profile1
+ 
 name:
   option: 1
 
@@ -21,10 +21,6 @@ address:
 spring:
   profiles: profile2
 
-server: 
-  servlet: 
-    context-path: /bank
-
 name:
   option: 1
 
@@ -35,10 +31,6 @@ address:
 
 spring:
   profiles: profile3
-  
-server: 
-  servlet: 
-    context-path: /bank
 
 name:
   option: 2
@@ -51,10 +43,6 @@ address:
 spring:
   profiles: profile4
   
-server: 
-  servlet: 
-    context-path: /bank
-
 name:
   option: 2
 
