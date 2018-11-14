@@ -2,8 +2,8 @@ server:
   servlet: 
     context-path: /bank
 
-spring:
-  profiles.active: profile3
+#spring:
+#  profiles.active: profile3
 
 ---
 
