@@ -3,6 +3,7 @@ package com.ebore.bank.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +27,15 @@ public class EmployeeController {
 	@Value("${address.option}")
 	private String addressOption;
 	
+	private static final String BANK_B_URI = "http://localhost:8000/receive";
+	private static final String FULL = "full";
+	private static final String PARTIAL = "partial";
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
 	@PostMapping("/process")
-	public ResponseEntity<HashMap> process(@RequestBody BankDetails bankDetails) {	
+	public ResponseEntity<Object> process(@RequestBody BankDetails bankDetails) {	
 		Employee employee = bankDetails.getEmployee();
 		Bank bank = bankDetails.getBank();
 		Address address = employee.getAddress();
@@ -42,17 +50,17 @@ public class EmployeeController {
 			subResult.put("employeeName", employee.getEmployeeLastName() + " " + employee.getEmployeeFirstName() + " " + employee.getEmployeeMiddleName());
 		}
 		
-		if (addressOption.equals("full")) {
+		if (addressOption.equals(FULL)) {
 			subResult.put("address",address.getAddressLine1() + " " + address.getAddressLine2() + " " + address.getCity() + " " + address.getState() + " " + address.getZip());
-		} else if (addressOption.equals("partial")){
+		} else if (addressOption.equals(PARTIAL)){
 			subResult.put("address",address.getAddressLine1() + " " + address.getCity() + " " + address.getState() + " " + address.getZip());
 		}
 		
-	    return new ResponseEntity(result,HttpStatus.OK);
+	    return new ResponseEntity<>(result,HttpStatus.OK);
 	}
 	
 	@PostMapping("/send")
-	public ResponseEntity<HashMap> testProcess(@RequestBody BankDetails bankDetails) {	
+	public ResponseEntity<Object> testProcess(@RequestBody BankDetails bankDetails) {	
 		Employee employee = bankDetails.getEmployee();
 		Bank bank = bankDetails.getBank();
 		Address address = employee.getAddress();
@@ -61,8 +69,8 @@ public class EmployeeController {
 		uriVariables.put("employeeName", employee);
 		uriVariables.put("address", address);
 		
-		ResponseEntity<Response> responseEntity = new RestTemplate()
-				.postForEntity("http://localhost:8000/receive", employee, Response.class);
+		ResponseEntity<Response> responseEntity = restTemplate
+				.postForEntity(BANK_B_URI, employee, Response.class);
 		
 		Response response = responseEntity.getBody();
 		
