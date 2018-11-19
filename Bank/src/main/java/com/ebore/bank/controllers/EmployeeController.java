@@ -27,7 +27,7 @@ public class EmployeeController {
 	@Value("${address.option}")
 	private String addressOption;
 	
-	private static final String BANK_B_URI = "http://localhost:8000/receive";
+	private static final String BANK_B_URI = "http://localhost:8100/receive";
 	private static final String FULL = "full";
 	private static final String PARTIAL = "partial";
 	
