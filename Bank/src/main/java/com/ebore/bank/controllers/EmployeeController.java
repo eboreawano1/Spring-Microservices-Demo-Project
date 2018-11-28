@@ -27,7 +27,11 @@ public class EmployeeController {
 	@Value("${address.option}")
 	private String addressOption;
 	
-	private static final String BANK_B_URI = "http://localhost:8100/receive";
+	@Value("${recipient.option}")
+	private String recipientOption;
+	
+	private static final String PRE_URI = "http://";
+	private static final String POST_URI = "/receive";
 	private static final String FULL = "full";
 	private static final String PARTIAL = "partial";
 	
@@ -70,13 +74,12 @@ public class EmployeeController {
 		uriVariables.put("address", address);
 		
 		ResponseEntity<Response> responseEntity = restTemplate
-				.postForEntity(BANK_B_URI, employee, Response.class);
+				.postForEntity(PRE_URI + recipientOption + POST_URI, employee, Response.class);
 		
 		Response response = responseEntity.getBody();
 		
 		HashMap<String,Response> result = new HashMap<>();
 		result.put("result", response);
-		
 		
 	    return new ResponseEntity<>(result,HttpStatus.OK);
 	}
