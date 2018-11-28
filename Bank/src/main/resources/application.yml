@@ -1,5 +1,6 @@
 spring:
   application.name: bank
+  profiles.active: profile1
 
 eureka:
   client:
@@ -10,9 +11,6 @@ server:
   #servlet: 
     #context-path: /bank
   port: 8080
-
-#spring:
-#  profiles.active: profile3
 
 ---
 
