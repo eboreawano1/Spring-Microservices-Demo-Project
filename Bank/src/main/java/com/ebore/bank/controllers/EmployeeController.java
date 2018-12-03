@@ -1,10 +1,15 @@
 package com.ebore.bank.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
+import org.apache.logging.log4j.CloseableThreadContext.Instance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +23,7 @@ import com.ebore.bank.entities.BankDetails;
 import com.ebore.bank.entities.Employee;
 import com.ebore.bank.entities.Response;
 
+
 @RestController
 public class EmployeeController {
 	
@@ -30,13 +36,15 @@ public class EmployeeController {
 	@Value("${recipient.option}")
 	private String recipientOption;
 	
-	private static final String PRE_URI = "http://";
 	private static final String POST_URI = "/receive";
 	private static final String FULL = "full";
 	private static final String PARTIAL = "partial";
 	
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private DiscoveryClient discoveryClient;
 	
 	@PostMapping("/process")
 	public ResponseEntity<Object> process(@RequestBody BankDetails bankDetails) {	
@@ -65,6 +73,21 @@ public class EmployeeController {
 	
 	@PostMapping("/send")
 	public ResponseEntity<Object> testProcess(@RequestBody BankDetails bankDetails) {	
+		List<ServiceInstance> instances = this.discoveryClient.getInstances(recipientOption);
+		
+		System.out.println("-------------------------------------");
+		for (ServiceInstance instance: instances) {
+			System.out.println(instance.getHost() + " " + instance.getPort() + " " + instance.getUri() + " " + instance.getServiceId());
+		}
+		System.out.println("-------------------------------------");
+		
+		Random random = new Random();
+		int i = random.nextInt(instances.size());
+		
+		String bankURI = instances.get(i).getUri().toString();
+		System.out.println();
+		System.out.println(instances.get(i).getHost() + " " + instances.get(i).getPort() + " " + instances.get(i).getUri() + " " + instances.get(i).getServiceId());
+		
 		Employee employee = bankDetails.getEmployee();
 		Bank bank = bankDetails.getBank();
 		Address address = employee.getAddress();
@@ -74,7 +97,7 @@ public class EmployeeController {
 		uriVariables.put("address", address);
 		
 		ResponseEntity<Response> responseEntity = restTemplate
-				.postForEntity(PRE_URI + recipientOption + POST_URI, employee, Response.class);
+				.postForEntity(bankURI + POST_URI, employee, Response.class);
 		
 		Response response = responseEntity.getBody();
 		
