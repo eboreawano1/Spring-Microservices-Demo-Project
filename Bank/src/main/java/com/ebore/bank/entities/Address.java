@@ -1,5 +1,8 @@
 package com.ebore.bank.entities;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Address {
 	private String addressLine1;
 	private String addressLine2;

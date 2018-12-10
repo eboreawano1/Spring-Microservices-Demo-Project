@@ -1,7 +1,14 @@
 package com.ebore.bank.entities;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Employee {
 
+	@Id
+	private ObjectId id;
 	private String employeeFirstName;
 	private String employeeMiddleName;
 	private String employeeLastName;
@@ -77,6 +84,14 @@ public class Employee {
 		return "Employee [employeeFirstName=" + employeeFirstName + ", employeeMiddleName=" + employeeMiddleName
 				+ ", employeeLastName=" + employeeLastName + ", employeeId=" + employeeId + ", employeeRole="
 				+ employeeRole + ", address=" + address + "]";
+	}
+
+	public ObjectId getId() {
+		return id;
+	}
+
+	public void setId(ObjectId id) {
+		this.id = id;
 	}
 }
 

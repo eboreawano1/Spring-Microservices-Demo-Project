@@ -1,8 +1,10 @@
 package com.ebore.bank.entities;
 
 public class Response {
+	
 	private String employeeName;
 	private String address;
+	
 	public String getEmployeeName() {
 		return employeeName;
 	}
@@ -15,6 +17,4 @@ public class Response {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
-	
 }
