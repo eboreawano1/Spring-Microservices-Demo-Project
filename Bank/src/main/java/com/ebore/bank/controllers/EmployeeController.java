@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.logging.log4j.CloseableThreadContext.Instance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,5 +106,15 @@ public class EmployeeController {
 		result.put("result", response);
 		
 	    return new ResponseEntity<>(result,HttpStatus.OK);
+	}
+	
+	@PostMapping("/time")
+	public void process() {	
+		try {
+			TimeUnit.SECONDS.sleep(15);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

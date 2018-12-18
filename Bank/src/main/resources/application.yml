@@ -3,12 +3,14 @@ spring:
   profiles.active: profile3
   data:
     mongodb:
-      authentication-database: admin
+      uri: mongodb+srv://admin:admin@data-5fv0k.mongodb.net/test?retryWrites=true
       database: Bank
-      host: data-shard-00-00-5fv0k.mongodb.net
-      username: admin
-      password: admin
-      port: 27017 
+#      authentication-database: admin
+#      database: Bank
+#      host: data-shard-00-00-5fv0k.mongodb.net
+#      username: admin
+#      password: admin
+#      port: 27017 
 
 eureka:
   client:

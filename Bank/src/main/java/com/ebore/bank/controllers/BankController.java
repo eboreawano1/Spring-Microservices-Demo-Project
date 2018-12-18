@@ -40,7 +40,7 @@ public class BankController {
 	  bankRepository.save(bank);
 	}
 	
-	@PostMapping(value = "/create")
+	@PostMapping(value = "/insert")
 	public Bank createBank(@Valid @RequestBody Bank bank) {
 	  bank.setId(ObjectId.get());
 	  bankRepository.save(bank);
@@ -50,5 +50,10 @@ public class BankController {
 	@DeleteMapping(value = "/delete/{id}")
 	public void deleteBank(@PathVariable ObjectId id) {
 	  bankRepository.delete(bankRepository.findById(id));
+	}
+	
+	@DeleteMapping(value = "/deleteAll")
+	public void deleteAllBanks() {
+	  bankRepository.deleteAll();
 	}
 }
